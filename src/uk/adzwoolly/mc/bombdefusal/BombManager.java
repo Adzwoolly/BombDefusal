@@ -1,8 +1,6 @@
 package uk.adzwoolly.mc.bombdefusal;
 
 import java.util.HashMap;
-
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -22,46 +20,46 @@ public class BombManager {
 	
 	public void addBomb(Block block){
 		Character nextName = name++;
-		Bomb newBomb = addBomb(nextName, block, 30);
+		Bomb newBomb = addBomb(nextName, block, 45);
 		@SuppressWarnings("unused")
 		BukkitTask task = newBomb.runTaskTimer(plugin, 0, 20*1);
 	}
 	
 	public boolean isArmed(String bombName){
-		Bukkit.broadcastMessage(BombDefusalMain.msgPrefix + "You need to defuse the bomb!");
-		return bombsName.containsKey(bombName);
+		if(getBomb(bombName) != null){
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean isArmed(Block block){
-		Bukkit.broadcastMessage(BombDefusalMain.msgPrefix + "You need to defuse the bomb!");
-		return bombsBlock.containsKey(block);
-	}
-	
-	
-	
-	public boolean defuseBomb(String bombName){
-		if(bombsName.containsKey(bombName.charAt(0))){
-			Bomb bomb = bombsName.get(bombName.charAt(0));
-			return defuseBomb(bomb);
+		if(getBomb(block) != null){
+			return true;
 		}
 		return false;
+	}
+	
+	public String getBombDefuseCode(String bombName){
+		Bomb bomb = getBomb(bombName);
+		if(bomb != null)
+			return bomb.getDefuseCode();
+		return null;
+	}
+	
+	private Bomb getBomb(String bombName){
+		return bombsName.get(Character.toUpperCase(bombName.charAt(0)));
+	}
+	
+	private Bomb getBomb(Block block){
+		return bombsBlock.get(block);
+	}
+	
+	public boolean defuseBomb(String bombName){
+		return removeBomb(getBomb(bombName));
 	}
 	
 	public boolean defuseBomb(Block block){
-		if(bombsBlock.containsKey(block)){
-			Bomb bomb = bombsBlock.get(block);
-			return defuseBomb(bomb);
-		}
-		return false;
-	}
-	
-	private boolean defuseBomb(Bomb bomb){
-		//if(bombs.containsValue(bomb)){
-			//Insert complex diffusion stuff here, maybe?
-			removeBomb(bomb);
-			return false;
-		//}
-		//return false;
+		return removeBomb(getBomb(block));
 	}
 	
 	private Bomb addBomb(Character name, Block block, int time){
@@ -71,10 +69,14 @@ public class BombManager {
 		return newBomb;
 	}
 	
-	protected void removeBomb(Bomb bomb){
-		bomb.defuse();
-		bombsName.values().remove(bomb);
-		bombsBlock.values().remove(bomb);
+	protected boolean removeBomb(Bomb bomb){
+		if(bomb != null){
+			bomb.defuse();
+			bombsName.values().remove(bomb);
+			bombsBlock.values().remove(bomb);
+			return true;
+		}
+		return false;
 	}
 	
 }

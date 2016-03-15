@@ -6,4 +6,4 @@ version: 1.0
 commands:
   defuse:
     description: Defuse a bomb!
-    usage: /defuse <bomb_name>
+    usage: /defuse <bomb_name> <defuse_code>
