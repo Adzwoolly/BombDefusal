@@ -1,9 +1,9 @@
-package uk.adzwoolly.mc.bombdefusal;
+package uk.adamwoollen.mc.bombdefusal;
 
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import uk.adzwoolly.mc.bombdefusal.commnds.DefuseCommand;
+import uk.adamwoollen.mc.bombdefusal.commnds.DefuseCommand;
 
 public class BombDefusalMain extends JavaPlugin{
 	

@@ -1,4 +1,4 @@
-package uk.adzwoolly.mc.bombdefusal;
+package uk.adamwoollen.mc.bombdefusal;
 
 import java.util.HashMap;
 import org.bukkit.block.Block;

@@ -1,11 +1,11 @@
-package uk.adzwoolly.mc.bombdefusal.commnds;
+package uk.adamwoollen.mc.bombdefusal.commnds;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import uk.adzwoolly.mc.bombdefusal.BombDefusalMain;
-import uk.adzwoolly.mc.bombdefusal.BombManager;
+import uk.adamwoollen.mc.bombdefusal.BombDefusalMain;
+import uk.adamwoollen.mc.bombdefusal.BombManager;
 
 public class DefuseCommand implements CommandExecutor{
 	
